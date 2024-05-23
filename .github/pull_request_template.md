@@ -5,7 +5,7 @@
 - 
 
 ### 🛠️반영 브랜치
--ex) eunkyung -> main
+- ex) eunkyung -> main
 
 ### 🧪테스트 결과
-ex) 테스트 결과 정상 동작, 오류 발생X
+- ex) 테스트 결과 정상 동작, 오류 발생X
