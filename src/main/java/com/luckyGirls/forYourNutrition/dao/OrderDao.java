@@ -6,7 +6,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.luckyGirls.forYourNutrition.domain.Order;
 
-public class OrderDao {
+public interface OrderDao {
 	//주문 조회 방법 -> membrId, orderId 2가지 방법
 	List<Order> getOrderByMemberId(int memberId)throws DataAccessException;
 	Order getOrder(int orderId) throws DataAccessException;
