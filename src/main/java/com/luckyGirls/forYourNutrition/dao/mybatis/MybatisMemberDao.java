@@ -7,10 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.luckyGirls.forYourNutrition.dao.mybatis.mapper.MemberMapper;
 import com.luckyGirls.forYourNutrition.domain.Member;
 
-/**
- * @author Yeonwoo Nam
- *
- */
 @Repository
 public class MybatisMemberDao {
 	
