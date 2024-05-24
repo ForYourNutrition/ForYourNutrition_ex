@@ -7,6 +7,13 @@ import org.springframework.stereotype.Repository;
 import com.luckyGirls.forYourNutrition.dao.mybatis.mapper.MemberMapper;
 import com.luckyGirls.forYourNutrition.domain.Member;
 
+<<<<<<< Updated upstream
+=======
+/**
+ * @author Yeonwoo N
+ *
+ */
+>>>>>>> Stashed changes
 @Repository
 public class MybatisMemberDao {
 	
