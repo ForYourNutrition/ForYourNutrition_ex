@@ -3,12 +3,18 @@ package com.luckyGirls.forYourNutrition.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 
 @SuppressWarnings("serial")
+@Entity
 public class Member implements Serializable {
 
 	/* Private Fields */
-
+	
+	@Id
+	private int member_id;
 	private String id;
 	private String password;
 	private String name;
@@ -21,7 +27,12 @@ public class Member implements Serializable {
 	private int taking_time;
   
 	/* JavaBeans Properties */
-  
+	public int getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(int member_id) {
+		this.member_id = member_id;
+	}
 	public String getId() {
 		return id;
 	}
