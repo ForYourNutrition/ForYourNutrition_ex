@@ -13,9 +13,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.util.WebUtils;
 
 @Controller
+@SessionAttributes("memberSession")
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
@@ -30,7 +32,7 @@ public class MemberController {
 		this.validator = validator;
 	}
 
-	@ModelAttribute("accountForm")
+	@ModelAttribute("member")
 	public AccountForm formBackingObject(HttpServletRequest request) 
 			throws Exception {
 		UserSession userSession = 
@@ -43,7 +45,6 @@ public class MemberController {
 			return new AccountForm();
 		}
 	}
-
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public ModelAndView viewLoginForm(HttpServletRequest request) throws Exception {
