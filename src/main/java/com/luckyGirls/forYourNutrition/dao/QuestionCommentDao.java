@@ -7,6 +7,9 @@ import org.springframework.dao.DataAccessException;
 import com.luckyGirls.forYourNutrition.domain.QuestionComment;
 
 public interface QuestionCommentDao {
+	
+	QuestionComment getQuestionComment(int qc_id) throws DataAccessException; //후기 댓글 정보 조회
+
 	void insertQuestionComment(QuestionComment questionComment) throws DataAccessException; //문의 댓글 추가
 	
 	void updateQuestionComment(QuestionComment questionComment) throws DataAccessException; //문	의 댓글 수정

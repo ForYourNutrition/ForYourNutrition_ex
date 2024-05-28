@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.luckyGirls.forYourNutrition.dao.QuestionCommentDao;
-import com.luckyGirls.forYourNutrition.domain.Question;
 import com.luckyGirls.forYourNutrition.domain.QuestionComment;
 
 import jakarta.persistence.EntityManager;
@@ -17,6 +16,13 @@ public class JpaQuestionCommentDao implements QuestionCommentDao {
 
 	@PersistenceContext
 	private EntityManager em;
+	
+	@Transactional
+	@Override
+	public QuestionComment getQuestionComment(int qc_id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return em.find(QuestionComment.class, qc_id);
+	}
 	
 	@Transactional
 	@Override
