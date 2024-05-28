@@ -10,6 +10,7 @@ public class Question implements Serializable{
 	private String title;
 	private Date qdate;
 	private String content;
+	private Item item;
 	
 	public int getQuestion_id() {
 		return question_id;
@@ -29,18 +30,22 @@ public class Question implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Date getRdate() {
-		return qdate;
-	}
-	public void setRdate(Date rdate) {
-		this.qdate = rdate;
-	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	
+	public Date getQdate() {
+		return qdate;
+	}
+	public void setQdate(Date qdate) {
+		this.qdate = qdate;
+	}
+	public Item getItem() {
+		return item;
+	}
+	public void setItem(Item item) {
+		this.item = item;
+	}
 }
