@@ -11,5 +11,5 @@ import lombok.RequiredArgsConstructor;
 @Transactional(readOnly = true)
 @Service
 public class ItemService {
-	private final ItemJpaRepository itemRepository;
+	private final ItemJpaRepository itemJpaRepository;
 }

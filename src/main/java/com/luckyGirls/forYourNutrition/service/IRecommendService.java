@@ -12,6 +12,6 @@ import lombok.RequiredArgsConstructor;
 @Transactional(readOnly = true)
 @Service
 public class IRecommendService {
-	private static ItemJpaRepository itemRepository;
-	private static IRecommendJpaRepository iRecommendRepository;
+	private static ItemJpaRepository itemJpaRepository;
+	private static IRecommendJpaRepository iRecommendJpaRepository;
 }
