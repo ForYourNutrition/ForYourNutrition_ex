@@ -9,11 +9,11 @@ import com.luckyGirls.forYourNutrition.domain.Review;
 public interface ReviewDao {
 	Review getReview(int review_id) throws DataAccessException; //후기 정보 조회
 	
-	void addReview(Review review) throws DataAccessException; //후기 추가
+	void insertReview(Review review) throws DataAccessException; //후기 추가
 	
 	void updateReview(Review review) throws DataAccessException; //후기 수정
 	
-	void deleteReview(int review_id) throws DataAccessException; //후기 삭제
+	void deleteReview(Review review) throws DataAccessException; //후기 삭제
 	
 	List<Review> getReviewListForItem(int item_id) throws DataAccessException; //상품에 대한 모든 후기 조회
 	
