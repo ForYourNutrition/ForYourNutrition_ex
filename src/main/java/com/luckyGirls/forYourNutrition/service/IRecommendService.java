@@ -3,8 +3,8 @@ package com.luckyGirls.forYourNutrition.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.luckyGirls.forYourNutrition.dao.repository.IRecommendRepository;
-import com.luckyGirls.forYourNutrition.dao.repository.ItemRepository;
+import com.luckyGirls.forYourNutrition.dao.jpa.repository.IRecommendJpaRepository;
+import com.luckyGirls.forYourNutrition.dao.jpa.repository.ItemJpaRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,6 +12,6 @@ import lombok.RequiredArgsConstructor;
 @Transactional(readOnly = true)
 @Service
 public class IRecommendService {
-	private static ItemRepository itemRepository;
-	private static IRecommendRepository iRecommendRepository;
+	private static ItemJpaRepository itemRepository;
+	private static IRecommendJpaRepository iRecommendRepository;
 }
