@@ -2,9 +2,6 @@ package com.luckyGirls.forYourNutrition.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.luckyGirls.forYourNutrition.common.BaseEntity;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Item extends BaseEntity {
+public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int item_id;
