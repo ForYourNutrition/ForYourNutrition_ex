@@ -9,6 +9,7 @@ public class QuestionComment implements Serializable{
 	private Question question;
 	private String content;
 	private Date qcdate;
+	private Member member;
 	
 	public int getQc_id() {
 		return qc_id;
@@ -28,12 +29,18 @@ public class QuestionComment implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getQdate() {
+	public Date getQcdate() {
 		return qcdate;
 	}
-	public void setQdate(Date qdate) {
-		this.qcdate = qdate;
+	public void setQcdate(Date qcdate) {
+		this.qcdate = qcdate;
 	}
-	
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
 	
 }

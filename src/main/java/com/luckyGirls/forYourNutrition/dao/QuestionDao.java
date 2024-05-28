@@ -9,11 +9,11 @@ import com.luckyGirls.forYourNutrition.domain.Question;
 public interface QuestionDao {
 	Question getQuestion(int question_id) throws DataAccessException; //문의 정보 조회
 	
-	void addQuestion(Question question) throws DataAccessException; //문의 추가
+	void insertQuestion(Question question) throws DataAccessException; //문의 추가
 	
 	void updateQuestion(Question question) throws DataAccessException; //문의 수정
 	
-	void deleteQuestion(int question_id) throws DataAccessException; //문의 삭제
+	void deleteQuestion(Question question) throws DataAccessException; //문의 삭제
 	
 	List<Question> getQuestionListForItem(int item_id) throws DataAccessException; //상품에 대한 모든 문의 조회
 	
