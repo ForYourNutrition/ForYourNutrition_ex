@@ -3,13 +3,18 @@ package com.luckyGirls.forYourNutrition.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+@SuppressWarnings("serial")
 public class ReviewComment implements Serializable{
 	
+	 /* Private Fields */
 	private int rc_id;
 	private Review review;
 	private Member member;
 	private String content;
-	private Date rdate;
+	private Date rcdate;
+	
+	/* JavaBeans Properties */
+
 	public int getRc_id() {
 		return rc_id;
 	}
@@ -34,12 +39,11 @@ public class ReviewComment implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRdate() {
-		return rdate;
+	public Date getRcdate() {
+		return rcdate;
 	}
-	public void setRdate(Date rdate) {
-		this.rdate = rdate;
+	public void setRcdate(Date rcdate) {
+		this.rcdate = rcdate;
 	}
-	
 	
 }

@@ -7,11 +7,13 @@ import org.springframework.dao.DataAccessException;
 import com.luckyGirls.forYourNutrition.domain.ReviewComment;
 
 public interface ReviewCommentDao {
+	ReviewComment getReviewComment(int rc_id) throws DataAccessException; //후기 댓글 정보 조회
+	
 	void insertReviewComment(ReviewComment reviewComment) throws DataAccessException; //후기 댓글 추가
 	
 	void updateReviewComment(ReviewComment reviewComment) throws DataAccessException; //후기 댓글 수정
 	
-	void deleteReviewComment(int rc_id) throws DataAccessException; //후기 댓글 삭제
+	void deleteReviewComment(ReviewComment reviewComment) throws DataAccessException; //후기 댓글 삭제
 	
 	List<ReviewComment> getReviewCommentListForReview(int review_id) throws DataAccessException; //후기에 대한 모든 댓글 조회
 	
