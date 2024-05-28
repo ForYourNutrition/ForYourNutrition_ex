@@ -7,7 +7,7 @@
 <body>
 <div>
     <h2>회원 가입</h2>
-    <form th:method="post" th:action="@{memberInfo}" th:object="${memberForm}">
+    <form th:method="post" th:action="@{member/memberInfo.do}" th:object="${memberForm}">
         <div>
             <label th:for="id">아이디</label><br>
             <input type="text" th:field="*{id}"/>

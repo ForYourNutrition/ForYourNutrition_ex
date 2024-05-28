@@ -42,22 +42,5 @@
   <delete id="deleteMember" parameterType="String">
     DELETE FROM MEMBER WHERE ID = #{id}
   </delete>
-  
-  <!-- 
-  <update id="deleteMember" parameterType="Member">
-  	UPDATE USERS SET
-  		EMAIL = '알수없음@deleted.user',
-  		PASSWD = '알수없음',
-  		USERNAME = '알수없음',
-  		NICKNAME = '알수없음',
-  		ADDRESS1 = null,
-  		ADDRESS2 = null,
-  		ADDRESS3 = null,
-  		PHONE = null,
-  		REFUNDBANK = null,
-  		REFUNDACCOUNT = null
-  	WHERE Mem = #{userId}
-  </update>
- 	-->
 	
 </mapper>

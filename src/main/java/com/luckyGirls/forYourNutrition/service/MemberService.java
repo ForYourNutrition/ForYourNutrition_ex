@@ -1,7 +1,9 @@
 package com.luckyGirls.forYourNutrition.service;
 
+import com.luckyGirls.forYourNutrition.domain.Member;
+
 public interface MemberService {
-	Member getMember(int member_id); //회원 정보 가져오기
+	Member getMember(String id); //회원 정보 가져오기
 	Member getMember(String id, String password); //id, password로 회원 정보 가져오기
 	void insertMember(Member member); //회원 가입
 	void updateMember(Member member); //회원 정보 수정
