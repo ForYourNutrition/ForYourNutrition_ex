@@ -3,7 +3,7 @@ package com.luckyGirls.forYourNutrition.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.luckyGirls.forYourNutrition.dao.ItemDao;
+import com.luckyGirls.forYourNutrition.dao.repository.ItemRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -11,5 +11,5 @@ import lombok.RequiredArgsConstructor;
 @Transactional(readOnly = true)
 @Service
 public class ItemService {
-	private final ItemDao itemDao;
+	private final ItemRepository itemRepository;
 }
