@@ -1,5 +1,4 @@
 package com.luckyGirls.forYourNutrition.domain;
-
 public class Address {
 	 private String shipAddress1;
 	  private String shipAddress2;
