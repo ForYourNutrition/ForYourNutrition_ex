@@ -1,7 +1,5 @@
 package com.luckyGirls.forYourNutrition.domain;
 
-import com.luckyGirls.forYourNutrition.common.BaseEntity;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class IRecommend extends BaseEntity {
+public class IRecommend {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int irecommend_id;

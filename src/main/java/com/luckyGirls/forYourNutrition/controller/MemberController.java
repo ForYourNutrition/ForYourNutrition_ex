@@ -1,21 +1,24 @@
 package com.luckyGirls.forYourNutrition.controller;
 
+import com.luckyGirls.forYourNutrition.domain.Member;
 import com.luckyGirls.forYourNutrition.service.MemberService;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import org.springframework.web.util.WebUtils;
 
 @Controller
+@SessionAttributes("memberSession")
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
@@ -23,33 +26,62 @@ public class MemberController {
 	@Value("ModifyAccountForm")
 	private String formViewName;
 
+	/*
 	//회원가입 시, 존재하는 session = return account, 존재하지 않으면 새로운 account form return
 	@Autowired
 	private AccountFormValidator validator;
 	public void setValidator(AccountFormValidator validator) {
 		this.validator = validator;
 	}
+	*/
 
-	@ModelAttribute("accountForm")
-	public AccountForm formBackingObject(HttpServletRequest request) 
-			throws Exception {
-		UserSession userSession = 
-				(UserSession) WebUtils.getSessionAttribute(request, "userSession");
-		if (userSession != null) {	// edit an existing account
-			return new AccountForm(
-					memberService.getMember(userSession.getMember().getMembername()));
-		}
-		else {	// create a new account
-			return new AccountForm();
-		}
+	@ModelAttribute("memberForm")
+	public MemberForm formBackingObject(HttpServletRequest request) throws Exception {
+		MemberSession memberSession = (MemberSession) WebUtils.getSessionAttribute(request, "memberSession");
+		return new MemberForm(memberService.getMember(memberSession.getMember().getId()));
 	}
 
-
-	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public ModelAndView viewLoginForm(HttpServletRequest request) throws Exception {
-		//추후 구현
+	//로그인 폼
+	@GetMapping("/member/loginForm.do")
+	public String loginForm(){
+		return "member/loginForm";
 	}
 
+	//로그인
+	@PostMapping("/member/login.do")
+	public ModelAndView login(HttpServletRequest request,
+			@RequestParam("id") String id,
+			@RequestParam("password") String password,
+			@RequestParam(value="forwardAction", required=false) String forwardAction,
+			HttpSession session,
+			Model model) throws Exception {
+		
+		
+		Member member = memberService.getMember(id, password);
+		
+		if (member == null) {
+			return new ModelAndView("Error", "message", 
+					"Invalid username or password.  Signon failed.");
+		}
+		
+		else {
+			MemberSession memberSession = new MemberSession(member);
+			
+			model.addAttribute("memberSession", memberSession);
+			model.addAttribute("nickname", memberSession.getMember().getNickname());
+			model.addAttribute("id", memberSession.getMember().getId());
+			
+			session.setAttribute("memberSession", memberSession);
+			System.out.println(memberSession.getMember().getId());
+			
+			if (forwardAction != null) 
+				return new ModelAndView("redirect:" + forwardAction);
+			else 
+				return new ModelAndView("main");
+		}
+	}
+	
+	/*
 	@RequestMapping(value = "/searchId.do", method = RequestMethod.GET)
 	public ModelAndView viewSerchIdForm(HttpServletRequest request) throws Exception {
 		//추후 구현
@@ -74,97 +106,62 @@ public class MemberController {
 		//추후 구현
 	}
 
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public ModelAndView login(HttpServletRequest request, 
-			@RequestParam("id") String id,
-			@RequestParam("password") String password,
-			@RequestParam(value="forwardAction", required=false) String forwardAction,
-			Model model) throws Exception {
-		Member member =  memberService.getMember(id);
+	 */
 
-		if (member == null) {
-			return new ModelAndView("Error", "message", 
-					"Invalid username or password.  Signon failed.");
-		}
-		else {
-			//추후 구현
-		}
-	}
-
-	@RequestMapping("/logout.do")
-	public ModelAndView logout(HttpServletRequest request) throws Exception {
-		session.removeAttribute("userSession");
+	//로그아웃
+	@RequestMapping("/member/logout.do")
+	public String handleRequest(HttpSession session) throws Exception {
+		session.removeAttribute("memberSession");
 		session.invalidate();
-		return "index";
+		return "member/loginForm";
 	}
 
-	@RequestMapping(value ="/createAccount.do" , method = RequestMethod.GET)
-	public String viewAccountForm(HttpServletRequest request) throws Exception {
-		//추후 구현
-		return formViewName;
+	//회원가입, 수정 폼
+	@GetMapping({"/member/joinForm.do", "/member/modifyMemberForm.do"})
+	public String joinForm() {
+		return "/member/joinForm";
 	}
 
-	@RequestMapping(value ="/createAccount.do" , method = RequestMethod.POST)
-	public ModelAndView createAccount(HttpServletRequest request, HttpSession session,
-			@ModelAttribute("accountForm") AccountForm accountForm,
-			BindingResult result) throws Exception {
-		validator.validate(accountForm, result);
-
-		if (result.hasErrors()) return formViewName;
+	
+	//회원가입, 수정
+	@PostMapping({"/member/join.do", "/member/modifyMember.do"})
+	public String join(HttpServletRequest request, HttpSession session,
+			@ModelAttribute("memberForm") MemberForm memberForm, BindingResult result, Model model) throws Exception {
+		
+		//new MemberFormValidator().validate(memberForm, result);
+		
+		if (result.hasErrors()) return "member/joinForm";
 		try {
-			if (accountForm.isNewAccount()) {
-				memberService.insertMember(accountForm.getAccount());
+			if (memberForm.isNewMember()) {
+				memberService.insertMember(memberForm.getMember());
 			}
 			else {
-				memberService.updateMember(accountForm.getAccount());
+				memberService.updateMember(memberForm.getMember());
 			}
 		}
 		catch (DataIntegrityViolationException ex) {
-			result.rejectValue("account.membername", "USER_ID_ALREADY_EXISTS",
+			result.rejectValue("member.id", "USER_ID_ALREADY_EXISTS",
 					"Member ID already exists: choose a different ID.");
-			return formViewName; 
+			return "member/joinForm"; 
 		}
-
-		//추후 구현
-		return successViewName;  
+		
+		MemberSession memberSession = new MemberSession(memberService.getMember(memberForm.getMember().getId()));
+		session.setAttribute("memberSession", memberSession);
+		return "member/memberInfo"; 
 	}
 
-
-	@RequestMapping(value ="/modifyAccount.do" , method = RequestMethod.GET)
-	public String viewModifyAccountForm(HttpServletRequest request) throws Exception {
-		//추후 구현
-		return formViewName;
+	@RequestMapping("member/delete.do")
+	public String deleteMember(HttpSession session) throws Exception {
+		MemberSession memberSession = (MemberSession) session.getAttribute("memberSession");
+		memberService.deleteMember(memberSession.getMember().getId());
+		session.removeAttribute("memberSession");
+		session.invalidate();
+		return "main";
 	}
-
-
-	@RequestMapping(value ="/modifyAccount.do" , method = RequestMethod.POST)
-	public ModelAndView modifyAccount(HttpServletRequest request, HttpSession session,
-			@ModelAttribute("accountForm") AccountForm accountForm,
-			BindingResult result) throws Exception {
-		validator.validate(accountForm, result);
-
-		if (result.hasErrors()) return formViewName;
-		try {
-			if (accountForm.isNewAccount()) {
-				memberService.insertMember(accountForm.getAccount());
-			}
-			else {
-				memberService.updateMember(accountForm.getAccount());
-			}
-		}
-		catch (DataIntegrityViolationException ex) {
-			result.rejectValue("account.membername", "USER_ID_ALREADY_EXISTS",
-					"Member ID already exists: choose a different ID.");
-			return formViewName; 
-		}
-
-		//추후 구현
-		return successViewName;  
-	}
-
-
-	@RequestMapping("/deleteAccount.do")
-	public ModelAndView deleteAccunt(HttpServletRequest request) throws Exception {
-		//추후 구현
+	
+	//회원정보
+	@GetMapping("/member/memberInfo.do")
+	public String memberInfo() {
+		return "/member/memberInfo";
 	}
 }

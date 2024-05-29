@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.luckyGirls.forYourNutrition.domain.Item;
 
-@Repository
-public interface ItemDao extends JpaRepository<Item, Long> {
+public interface ItemDao {
 
 }
