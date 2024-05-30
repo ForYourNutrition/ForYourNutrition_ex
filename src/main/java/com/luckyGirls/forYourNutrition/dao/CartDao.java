@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import com.luckyGirls.forYourNutrition.domain.Item;
+
 public interface CartDao {
 	List<Item> getCartList(int member_id) throws DataAccessException; //장바구니 조회
 	
