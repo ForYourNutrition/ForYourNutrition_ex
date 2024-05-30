@@ -10,10 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-	@Autowired
-	@Qualifier(value = "signonInterceptor")
-	private HandlerInterceptor interceptor;
-
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/member/loginForm.do").setViewName("/member/loginForm");
