@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import com.luckyGirls.forYourNutrition.domain.Item;
+
 public interface WishDao {
 	List<Item> getWishList(int member_id) throws DataAccessException; //위시리스트(찜) 조회
 	
