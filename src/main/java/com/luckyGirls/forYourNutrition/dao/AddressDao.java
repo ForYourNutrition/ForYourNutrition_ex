@@ -6,10 +6,6 @@ import org.springframework.dao.DataAccessException;
 
 import com.luckyGirls.forYourNutrition.domain.Address;
 
-/**
- * @author Yeonwoo Nam
- *
- */
 public interface AddressDao {
 	void insertAddress(Address address) throws DataAccessException; // 배송지 추가
 	
