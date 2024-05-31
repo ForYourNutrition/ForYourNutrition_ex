@@ -35,49 +35,55 @@ public class MemberController {
 	}
 	*/
 
+	/*
 	@ModelAttribute("memberForm")
 	public MemberForm formBackingObject(HttpServletRequest request) throws Exception {
 		MemberSession memberSession = (MemberSession) WebUtils.getSessionAttribute(request, "memberSession");
 		return new MemberForm(memberService.getMember(memberSession.getMember().getId()));
 	}
+	*/
 
 	//로그인 폼
 	@GetMapping("/member/loginForm.do")
-	public String loginForm(){
+	public String loginForm(Model model){
+		model.addAttribute("member", new Member());
 		return "member/loginForm";
 	}
 
 	//로그인
 	@PostMapping("/member/login.do")
 	public ModelAndView login(HttpServletRequest request,
-			@RequestParam("id") String id,
-			@RequestParam("password") String password,
+			@ModelAttribute("member") Member member,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
 			HttpSession session,
 			Model model) throws Exception {
+		/*
+		new LoginFormValidator().validate(loginForm, bindingResult);
+
+		// 검증 오류 발생 시 다시 form view로 이동
+		if (bindingResult.hasErrors()) {
+			return new ModelAndView(formViewName);
+		}
+		*/
 		
+		Member m = memberService.getMember(member.getId(), member.getPassword());
 		
-		Member member = memberService.getMember(id, password);
-		
-		if (member == null) {
+		if (m == null) {
 			return new ModelAndView("Error", "message", 
 					"Invalid username or password.  Signon failed.");
 		}
 		
 		else {
-			MemberSession memberSession = new MemberSession(member);
+			MemberSession memberSession = new MemberSession(m);
 			
-			model.addAttribute("memberSession", memberSession);
+			model.addAttribute("member", memberSession.getMember());
 			model.addAttribute("nickname", memberSession.getMember().getNickname());
 			model.addAttribute("id", memberSession.getMember().getId());
 			
-			session.setAttribute("memberSession", memberSession);
+			session.setAttribute("ms", memberSession);
 			System.out.println(memberSession.getMember().getId());
 			
-			if (forwardAction != null) 
-				return new ModelAndView("redirect:" + forwardAction);
-			else 
-				return new ModelAndView("main");
+			return new ModelAndView("/member/memberInfo");
 		}
 	}
 	
@@ -110,9 +116,10 @@ public class MemberController {
 
 	//로그아웃
 	@RequestMapping("/member/logout.do")
-	public String handleRequest(HttpSession session) throws Exception {
-		session.removeAttribute("memberSession");
+	public String handleRequest(HttpSession session, Model model) throws Exception {
+		session.removeAttribute("ms");
 		session.invalidate();
+		model.addAttribute("member", new Member());
 		return "member/loginForm";
 	}
 
@@ -161,7 +168,16 @@ public class MemberController {
 	
 	//회원정보
 	@GetMapping("/member/memberInfo.do")
-	public String memberInfo() {
-		return "/member/memberInfo";
+	public ModelAndView memberInfo(HttpSession session, Model model) throws Exception {
+		try {
+			MemberSession ms = (MemberSession)session.getAttribute("ms");
+			Member member = ms.getMember();
+			model.addAttribute("member", member);
+			return new ModelAndView("/member/memberInfo");
+		}
+		catch (NullPointerException ex) {
+			model.addAttribute("member", new Member());
+			return new ModelAndView("member/loginForm");
+		}
 	}
 }

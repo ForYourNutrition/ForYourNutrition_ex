@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
-
-import com.luckyGirls.forYourNutrition.common.BaseEntity;
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.CascadeType;
@@ -34,10 +30,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="ORDERS")
-@SecondaryTable(name="ORDERSTATUS",
+@Table(name="ORDER")
+@SecondaryTable(name="ORDERITEM",
 pkJoinColumns=@PrimaryKeyJoinColumn(
 		name="orderid", referencedColumnName="orderid"))
+@SecondaryTable(name="ADDRESS",
+pkJoinColumns=@PrimaryKeyJoinColumn(
+		name="addressid", referencedColumnName="addressid"))
+
 public class Order {
 	/*기본적으로 가지고 있어야 할 ID*/
 	@Id
@@ -50,17 +50,6 @@ public class Order {
 	private String username;
 	@Temporal(TemporalType.DATE)
 	private Date orderDate;
-
-	@Embedded
-	@AttributeOverrides({
-		@AttributeOverride(name="addr1", column=@Column(name="shipaddr1")),
-		@AttributeOverride(name="addr2", column=@Column(name="shipaddr2")),
-		@AttributeOverride(name="city", column=@Column(name="shipcity")),
-		@AttributeOverride(name="state", column=@Column(name="shipstate")),
-		@AttributeOverride(name="zip", column=@Column(name="shipzip")),
-		@AttributeOverride(name="country", column=@Column(name="shipcountry")) 
-	})
-	private Address address;
 
 	private double totalPrice;
 
