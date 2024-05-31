@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.luckyGirls.forYourNutrition.domain.Item;
 
-import com.luckyGirls.forYourNutrition.domain.Item;
-
 public interface WishDao {
 	List<Item> getWishList(int member_id) throws DataAccessException; //위시리스트(찜) 조회
 	
