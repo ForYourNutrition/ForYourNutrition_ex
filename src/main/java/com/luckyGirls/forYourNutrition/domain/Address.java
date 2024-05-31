@@ -4,6 +4,7 @@ import jakarta.persistence.Table;
 
 @Table(name = "Address")
 public class Address {
+	//test
 	 private String shipAddress1;
 	  private String shipAddress2;
 	  private String shipCity;
