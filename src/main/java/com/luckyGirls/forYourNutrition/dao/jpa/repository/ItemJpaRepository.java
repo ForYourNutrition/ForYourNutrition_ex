@@ -10,7 +10,7 @@ import com.luckyGirls.forYourNutrition.domain.Item;
 
 @Repository
 public interface ItemJpaRepository extends JpaRepository<Item, Integer> {
-	Optional<Item> findByItem_id(int item_id);
-
-	List<Item> findAllByCategory(int category);
+	// Optional<Item> findByItem_id(int item_id);
+	//
+	// List<Item> findAllByCategory(int category);
 }

@@ -5,15 +5,21 @@ import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
+@Table(name = "Member")
 public class Member implements Serializable {
 
 	/* Private Fields */
 	
 	@Id
+	@SequenceGenerator( 
+		     name = "MEMBER_SEQ_GENERATOR", 
+		     sequenceName = "MEMBERID_SEQ",
+		     initialValue = 1, allocationSize = 50)
 	private int member_id;
 	private String id;
 	private String password;

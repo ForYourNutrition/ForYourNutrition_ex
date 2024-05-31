@@ -3,6 +3,10 @@ package com.luckyGirls.forYourNutrition.dao;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
+
+import com.luckyGirls.forYourNutrition.domain.Item;
+
 
 import com.luckyGirls.forYourNutrition.domain.Item;
 

@@ -4,21 +4,31 @@ import java.util.List;
 import java.io.Serializable;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
-public class Survey {
+@Table(name = "Survey")
+public class Survey implements Serializable {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int survey_id;
+	@OneToOne
+	@JoinColumn(name = "member_id")
 	Member member;
 	int gender;
 	int birth_year;
 	String effect;
 	int smoking;
 	int drinking;
-	List<Integer> exercising;
-	
+	int exercising;
+
 	public int getSurvey_id() {
 		return survey_id;
 	}
@@ -61,10 +71,10 @@ public class Survey {
 	public void setDrinking(int drinking) {
 		this.drinking = drinking;
 	}
-	public List<Integer> getExercising() {
+	public int getExercising() {
 		return exercising;
 	}
-	public void setExercising(List<Integer> exercising) {
+	public void setExercising(int exercising) {
 		this.exercising = exercising;
 	}
 }
