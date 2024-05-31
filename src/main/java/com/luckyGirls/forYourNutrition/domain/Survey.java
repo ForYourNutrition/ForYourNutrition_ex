@@ -4,12 +4,20 @@ import java.util.List;
 import java.io.Serializable;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @SuppressWarnings("serial")
 @Entity
+<<<<<<< Updated upstream
 public class Survey {
+=======
+@Table(name = "Survey")
+public class Survey implements Serializable {
+>>>>>>> Stashed changes
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int survey_id;
 	Member member;
 	int gender;
@@ -17,8 +25,13 @@ public class Survey {
 	String effect;
 	int smoking;
 	int drinking;
+<<<<<<< Updated upstream
 	List<Integer> exercising;
 	
+=======
+	int exercising;
+
+>>>>>>> Stashed changes
 	public int getSurvey_id() {
 		return survey_id;
 	}
@@ -61,10 +74,17 @@ public class Survey {
 	public void setDrinking(int drinking) {
 		this.drinking = drinking;
 	}
+<<<<<<< Updated upstream
 	public List<Integer> getExercising() {
 		return exercising;
 	}
 	public void setExercising(List<Integer> exercising) {
+=======
+	public int getExercising() {
+		return exercising;
+	}
+	public void setExercising(int exercising) {
+>>>>>>> Stashed changes
 		this.exercising = exercising;
 	}
 }

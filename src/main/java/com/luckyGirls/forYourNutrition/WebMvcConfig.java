@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
+<<<<<<< Updated upstream
 	@Autowired
 	@Qualifier(value = "signonInterceptor")
 	private HandlerInterceptor interceptor;
@@ -18,4 +19,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/member/loginForm.do").setViewName("/member/loginForm");
 	}
+=======
+   @Override
+   public void addViewControllers(ViewControllerRegistry registry) {
+      registry.addViewController("/index.html");
+   }
+>>>>>>> Stashed changes
 }
