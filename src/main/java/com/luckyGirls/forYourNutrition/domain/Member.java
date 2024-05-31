@@ -5,11 +5,10 @@ import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "Member")
 public class Member implements Serializable {
 
 	/* Private Fields */

@@ -2,9 +2,6 @@ package com.luckyGirls.forYourNutrition.domain;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Table;
-
-@Table(name = "WishItem")
 public class WishItem implements Serializable{
 	private int wish_id;
 	private Member member;

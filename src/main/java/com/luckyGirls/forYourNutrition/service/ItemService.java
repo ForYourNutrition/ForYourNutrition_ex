@@ -7,9 +7,9 @@ import com.luckyGirls.forYourNutrition.dao.jpa.repository.ItemJpaRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Service
 public class ItemService {
 	private final ItemJpaRepository itemJpaRepository;
 }

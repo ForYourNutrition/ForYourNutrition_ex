@@ -30,13 +30,20 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="order")
+@Table(name="ORDER")
+@SecondaryTable(name="ORDERITEM",
+pkJoinColumns=@PrimaryKeyJoinColumn(
+		name="orderid", referencedColumnName="orderid"))
+@SecondaryTable(name="ADDRESS",
+pkJoinColumns=@PrimaryKeyJoinColumn(
+		name="addressid", referencedColumnName="addressid"))
+
 public class Order {
 	/*기본적으로 가지고 있어야 할 ID*/
 	@Id
 	private int orderId;
 
-	@Column(name="memberid")
+	@Column(name="memberid") 
 	private int memberId;
 
 	/*주문에 필요한 정보들*/
@@ -57,7 +64,7 @@ public class Order {
 	/*결제 수단(카드) 정보*/
 	private String creditCard;
 
-	@Column(name="exprdate")
+	@Column(name="exprdate") 
 	private String expiryDate;
 	/*cardType 까지 필요한지는 모르겠으나 예제에 있어서 일단 추후에 수정 예정*/
 	private String cardType;
@@ -72,7 +79,7 @@ public class Order {
 	public void setLineItems(List<OrderItem> lineItems) { this.orderItems = orderItems; }
 	public List<OrderItem> getLineItems() { return orderItems; }
 
-	/* 카트 -> 주문으로 넘기는 method 카트 구현, member 구현에 따라 수정되기 떄문에 일단 냅두겠음
+	/* 카트 -> 주문으로 넘기는 method 카트 구현, member 구현에 따라 수정되기 떄문에 일단 냅두겠음 
 	  public void initOrder(Member member, Cart cart) {
 	    username = member.getUsername();
 	    orderDate = new Date();

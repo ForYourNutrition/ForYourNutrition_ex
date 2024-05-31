@@ -3,7 +3,6 @@ package com.luckyGirls.forYourNutrition.dao.jpa;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Repository;
 
 import com.luckyGirls.forYourNutrition.dao.ReviewDao;
 import com.luckyGirls.forYourNutrition.domain.Review;
@@ -13,7 +12,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
-@Repository
 public class JpaReviewDao implements ReviewDao {
 	@PersistenceContext
 	private EntityManager em;

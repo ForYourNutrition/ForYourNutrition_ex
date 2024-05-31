@@ -9,5 +9,5 @@ import com.luckyGirls.forYourNutrition.domain.IRecommend;
 
 @Repository
 public interface IRecommendJpaRepository extends JpaRepository<IRecommend, Integer> {
-	// Optional<IRecommend> findByIrecommend_idAndCtype(int irecommend_id, int ctype);
+	Optional<IRecommend> findByIrecommend_idAndCtype(int irecommend_id, int ctype);
 }

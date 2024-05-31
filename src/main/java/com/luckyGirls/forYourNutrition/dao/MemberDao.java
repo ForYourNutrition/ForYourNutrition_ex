@@ -1,7 +1,6 @@
 package com.luckyGirls.forYourNutrition.dao;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Repository;
 
 import com.luckyGirls.forYourNutrition.domain.Member;
 

@@ -1,8 +1,4 @@
 package com.luckyGirls.forYourNutrition.domain;
-
-import jakarta.persistence.Table;
-
-@Table(name = "Address")
 public class Address {
 	 private String shipAddress1;
 	  private String shipAddress2;
