@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.luckyGirls.forYourNutrition.dao.MemberDao;
 import com.luckyGirls.forYourNutrition.dao.mybatis.mapper.MemberMapper;
 import com.luckyGirls.forYourNutrition.domain.Member;
 
@@ -12,7 +13,7 @@ import com.luckyGirls.forYourNutrition.domain.Member;
  *
  */
 @Repository
-public class MybatisMemberDao {
+public class MybatisMemberDao implements MemberDao{
 	
 	@Autowired
 	private MemberMapper memberMapper;

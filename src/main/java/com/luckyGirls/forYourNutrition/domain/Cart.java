@@ -8,6 +8,9 @@ import java.util.Map;
 
 import org.springframework.beans.support.PagedListHolder;
 
+import jakarta.persistence.Table;
+
+@Table(name = "Cart")
 @SuppressWarnings("serial")
 public class Cart implements Serializable{
 	
